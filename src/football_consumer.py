@@ -1,3 +1,19 @@
+"""
+Spark Structured Streaming consumer for real-time soccer match data.
+
+This script subscribes to a Kafka topic containing normalized soccer match
+snapshots produced by the ingestion pipeline. It parses core fixture fields
+using an explicit schema, dynamically extracts team-level statistics from
+the raw JSON payload, and performs light feature engineering such as pass
+accuracy, expected goals difference, and betting odds difference.
+
+Processed records are continuously written to two sinks: a console output
+for live monitoring and a CSV file for downstream analytics and visualization.
+The pipeline is designed to handle evolving API schemas and variable team
+identifiers in real-time data streams.
+"""
+
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col, regexp_replace, expr, when, lit, lower
 from pyspark.sql.types import StringType, DoubleType, IntegerType, StructType, MapType
