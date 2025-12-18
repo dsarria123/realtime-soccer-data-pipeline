@@ -1,3 +1,18 @@
+"""
+Streamlit-based Kafka producer for real-time soccer match data.
+
+This script fetches live soccer fixture data from an external API, including
+core match metadata, team statistics, and betting odds. It normalizes the
+API responses into a flat, analysis-ready record and publishes each snapshot
+to a Kafka topic for downstream streaming consumers.
+
+The Streamlit interface allows users to either input a specific fixture ID
+or automatically select a currently live match, inspect the structured data
+in real time, and trigger streaming to Kafka. Each record is also optionally
+appended to a local CSV file for persistence and debugging.
+"""
+
+
 import os
 import json
 import time
